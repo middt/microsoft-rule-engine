@@ -1,0 +1,47 @@
+[
+  {
+    "WorkflowName": "DiscountRules",
+    "Rules": [
+      {
+        "RuleName": "GiveDiscount10",
+        "SuccessEvent": "10% discount applied",
+        "ErrorMessage": "Customer not eligible for 10% discount",
+        "ErrorType": "Warning",
+        "RuleExpressionType": "LambdaExpression",
+        "Expression": "input1.Country == \"USA\" AND input1.LoyaltyFactor <= 2 AND input1.TotalPurchasesToDate >= 1000"
+      },
+      {
+        "RuleName": "GiveDiscount15",
+        "SuccessEvent": "15% discount applied",
+        "ErrorMessage": "Customer not eligible for 15% discount",
+        "ErrorType": "Warning",
+        "RuleExpressionType": "LambdaExpression",
+        "Expression": "input1.Country == \"USA\" AND input1.LoyaltyFactor >= 3 AND input1.TotalPurchasesToDate >= 2500"
+      },
+      {
+        "RuleName": "GiveDiscount20",
+        "SuccessEvent": "20% discount applied - Premium customer!",
+        "ErrorMessage": "Customer not eligible for 20% discount",
+        "ErrorType": "Warning",
+        "RuleExpressionType": "LambdaExpression",
+        "Expression": "input1.Country == \"USA\" AND input1.LoyaltyFactor >= 5 AND input1.TotalPurchasesToDate >= 5000 AND input1.MembershipLevel == \"Premium\""
+      },
+      {
+        "RuleName": "SeniorDiscount",
+        "SuccessEvent": "Senior citizen discount (5%) applied",
+        "ErrorMessage": "Not eligible for senior discount",
+        "ErrorType": "Warning",
+        "RuleExpressionType": "LambdaExpression",
+        "Expression": "input1.Age >= 65"
+      },
+      {
+        "RuleName": "NewCustomerDiscount",
+        "SuccessEvent": "New customer welcome discount (8%) applied",
+        "ErrorMessage": "Not a new customer",
+        "ErrorType": "Warning",
+        "RuleExpressionType": "LambdaExpression",
+        "Expression": "input1.YearsAsCustomer <= 1 AND input1.IsEmailVerified == true"
+      }
+    ]
+  }
+]
